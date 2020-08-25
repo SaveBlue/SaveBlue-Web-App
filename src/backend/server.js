@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const passport = require('passport');
 const server = express();
 const port = process.env.PORT || 3000;
 const url = process.env.URL || "http://localhost";
@@ -21,10 +22,13 @@ server.use(bodyParser.urlencoded({ extended: true }));
 
 /*require("./routes/users.routes")(server);
 require("./routes/accounts.routes")(server);*/
+//require("./config/passport");
 
 const path = require('path')
 // Server static files from the Vue frontend app
 server.use(express.static(path.join(__dirname, '/dist')));
+
+server.use(passport.initialize());
 
 /*server.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/dist/index.html'));
