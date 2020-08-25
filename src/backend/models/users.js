@@ -3,32 +3,13 @@ var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
 var Schema = mongoose.Schema;
 
-const user = new Schema({
-    username: {type: String, required: true},
-    password: {type: String, required: true},
-    email: {type: String, required: true},
-    hashValue: {type: String, required: true},
-    salt: {type: String, required: true},
-    accounts: {type: [account], required: true},
-});
-
-const account = new Schema({
-    name: {type: String, required: true},
-    currentBalance: {type: Number, required: true},
-    budgets: [budget],
-    goals: [goal],
-    expenses: [expense],
-    incomes: [income],
-    startOfMonth: {type: Number, required: true}
-
-});
 
 const budget = new Schema({
     category: {type: String, required: true},
     // category: { type: String, enum: ['category1', 'category2', 'category3'], required: true },
     budgetAmount: {type: Number, required: true},
     startDate: {type: Date, required: true},
-    endDate:{type: Date, required: true, }
+    endDate: {type: Date, required: true,}
 });
 
 const goal = new Schema({
@@ -43,7 +24,7 @@ const expense = new Schema({
     name: {type: String, required: true},
     description: String,
     // category: { type: String, enum: ['category1', 'category2', 'category3'], required: true },
-    date: { type: Date, default: Date.now },
+    date: {type: Date, default: Date.now},
     amount: {type: Number, required: true}
 });
 
@@ -51,18 +32,38 @@ const income = new Schema({
     name: {type: String, required: true},
     description: String,
     // category: { type: String, enum: ['category1', 'category2', 'category3'], required: true },
-    date: { type: Date, default: Date.now },
+    date: {type: Date, default: Date.now},
     amount: {type: Number, required: true}
 });
 
-uporabnikShema.methods.nastaviGeslo = function(geslo) {
+const account = new Schema({
+    name: {type: String, required: true},
+    currentBalance: {type: Number, required: true},
+    budgets: [budget],
+    goals: [goal],
+    expenses: [expense],
+    incomes: [income],
+    startOfMonth: {type: Number, required: true}
+
+});
+
+const user = new Schema({
+    username: {type: String, required: true},
+    password: {type: String, required: true},
+    email: {type: String, required: true},
+    hashValue: {type: String, required: true},
+    salt: {type: String, required: true},
+    accounts: {type: [account], required: true},
+});
+
+/*user.methods.nastaviGeslo = function(geslo) {
     this.nakljucnaVrednost = crypto.randomBytes(16).toString('hex');
     this.zgoscenaVrednost = crypto
         .pbkdf2Sync(geslo, this.nakljucnaVrednost, 1000, 64, 'sha512')
         .toString('hex');
 };
 
-uporabnikShema.methods.preveriGeslo = function(geslo) {
+user.methods.checkPassword = function(geslo) {
     console.log(this.nakljucnaVrednost);
     var zgoscenaVrednost = crypto
         .pbkdf2Sync(geslo, this.nakljucnaVrednost, 1000, 64, 'sha512')
@@ -71,7 +72,7 @@ uporabnikShema.methods.preveriGeslo = function(geslo) {
     return this.zgoscenaVrednost == zgoscenaVrednost;
 };
 
-uporabnikShema.methods.generirajJwt = function() {
+user.methods.generirajJwt = function() {
     const datumPoteka = new Date();
     datumPoteka.setDate(datumPoteka.getDate() + 7);
 
@@ -87,6 +88,6 @@ uporabnikShema.methods.generirajJwt = function() {
         admin: this.admin,
         datumPoteka: parseInt(datumPoteka.getTime() / 1000, 10)
     }, process.env.JWT_GESLO);
-};
+};*/
 
 mongoose.model('User', user);

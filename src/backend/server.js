@@ -8,7 +8,7 @@ const url = process.env.URL || "http://localhost";
 
 //---------------------------------------------
 // cors settings
-var corsOptions = {
+let corsOptions = {
     origin: url +":"+ 8080
 };
 server.use(cors(corsOptions));
@@ -22,7 +22,8 @@ server.use(bodyParser.urlencoded({ extended: true }));
 
 /*require("./routes/users.routes")(server);
 require("./routes/accounts.routes")(server);*/
-//require("./config/passport");
+//require("./config/passport.js");
+require("./models/db.js");
 
 const path = require('path')
 // Server static files from the Vue frontend app
