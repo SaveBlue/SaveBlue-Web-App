@@ -13,7 +13,7 @@ mongoose.connect(dbURI, {
 });
 
 
-// Debug messages
+// Database state debug messages
 mongoose.connection.on('connected', () => {
     console.log(`Mongoose connected to ${dbURI}.`);
 });
