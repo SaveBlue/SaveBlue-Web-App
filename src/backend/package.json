@@ -18,5 +18,7 @@
   "bugs": {
     "url": "https://github.com/SaveBlue/SaveBlue-Web-App/issues"
   },
-  "homepage": "https://github.com/SaveBlue/SaveBlue-Web-App#readme"
+  "homepage": "https://github.com/SaveBlue/SaveBlue-Web-App#readme",
+  "dependencies": {
+  }
 }
