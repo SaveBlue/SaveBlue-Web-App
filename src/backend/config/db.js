@@ -5,7 +5,6 @@ if (process.env.NODE_ENV === 'production') {
     dbURI = process.env.MONGODB_CLOUD_URI;
 }
 
-
 mongoose.connect(dbURI, {
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -13,21 +12,23 @@ mongoose.connect(dbURI, {
     useFindAndModify: false
 });
 
+
+// Debug messages
 mongoose.connection.on('connected', () => {
     console.log(`Mongoose connected to ${dbURI}.`);
 });
 
-mongoose.connection.on('error', napaka => {
-    console.log('Mongoose connection error: ', napaka);
+mongoose.connection.on('error', error => {
+    console.log('Mongoose connection error: ', error);
 });
 
 mongoose.connection.on('disconnected', () => {
     console.log('Mongoose not connected.');
 });
 
-const pravilnaUstavitev = (sporocilo, povratniKlic) => {
+const safeExit = (message, callback) => {
     mongoose.connection.close(() => {
-        console.log(`Mongoose closed the connection via '${sporocilo}'.`);
+        console.log(`Mongoose closed the connection via '${message}'.`);
         callback();
     });
 };
