@@ -17,5 +17,8 @@ module.exports = usersRouter => {
     // Delete user by ID
     router.delete("/:id",usersController.delete);
 
+    // Update user by id
+    router.put("/update/:id",usersController.update);
+
     usersRouter.use('/api/users', router);
 };
