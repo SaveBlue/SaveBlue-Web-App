@@ -3,7 +3,6 @@ var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
 var Schema = mongoose.Schema;
 
-
 const budget = new Schema({
     category: {type: String, required: true},
     // category: { type: String, enum: ['category1', 'category2', 'category3'], required: true },
@@ -46,6 +45,7 @@ const account = new Schema({
     startOfMonth: {type: Number, required: true}
 
 });
+
 
 const user = new Schema({
     username: {type: String, required: true},
