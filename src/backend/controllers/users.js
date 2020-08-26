@@ -42,7 +42,17 @@ exports.login = (req, res) => {
 
 // Find a user with an id
 exports.findByID = (req, res) => {
-
+    User.find({_id: req.params.id})
+        .exec((error, user) => {
+            if(!user) {
+                return res.status(404).json({
+                    message:"No user with this ID!"
+                });
+            } else if (error) {
+                return res.status(500).json(error);
+            }
+            res.status(200).json(user);
+        })
 };
 
 // Update user's data by the id in the request

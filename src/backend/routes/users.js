@@ -14,5 +14,9 @@ module.exports = usersRouter => {
     // Register new user
     router.post("/register",usersController.register);
 
+
+    // Find user by ID
+    router.get("/:id",usersController.findByID);
+
     usersRouter.use('/api/users', router);
 };
