@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
-var crypto = require('crypto');
-var jwt = require('jsonwebtoken');
-var Schema = mongoose.Schema;
+let crypto = require('crypto');
+let jwt = require('jsonwebtoken');
+let config = require('../config/auth');
+let Schema = mongoose.Schema;
 
 const budget = new Schema({
     category: {type: String, required: true},
@@ -71,11 +72,10 @@ user.methods.checkPassword = function(password) {
     return this.hashedPassword === hashedPassword;
 };
 
+// Generates and signs jwt for 24 hours
 user.methods.generateJWT = function() {
-    const expirationDate = new Date();
-    expirationDate.setDate(expirationDate.getDate() + 7);
 
-    return jwt.sign({ id: user.id }, config.secret, {
+    return jwt.sign({ id: this._id, username: this.username }, config.secret, {
         expiresIn: 86400 // 24 hours
     });
 };

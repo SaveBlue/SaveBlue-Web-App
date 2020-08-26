@@ -18,5 +18,5 @@ module.exports = authenticationRouter => {
     router.post("/login",authenticationController.login);
 
 
-    authenticationRouter.use('/api/users', router);
+    authenticationRouter.use('/api/auth', router);
 };
