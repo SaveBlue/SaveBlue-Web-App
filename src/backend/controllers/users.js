@@ -28,9 +28,9 @@ exports.register = (req, res) => {
         .then(data => {
             res.send(data);
         })
-        .catch(err => {
+        .catch(error => {
             res.status(500).send({
-                message: err.message || "An error occurred while creating new User!"
+                message: error.message || "An error occurred while creating new user!"
             });
         });
 };
@@ -42,17 +42,20 @@ exports.login = (req, res) => {
 
 // Find a user with an id
 exports.findByID = (req, res) => {
-    User.find({_id: req.params.id})
-        .exec((error, user) => {
+    User.findById({_id: req.params.id})
+        .then( user => {
             if(!user) {
                 return res.status(404).json({
-                    message:"No user with this ID!"
+                    message:"No user with selected ID!"
                 });
-            } else if (error) {
-                return res.status(500).json(error);
             }
             res.status(200).json(user);
         })
+        .catch(error => {
+            res.status(500).send({
+                message: error.message || "An error occurred while fetching user!"
+            });
+        });
 };
 
 // Update user's data by the id in the request
@@ -62,5 +65,21 @@ exports.update = (req, res) => {
 
 // Delete user's account with the specified id in the request
 exports.delete = (req, res) => {
-
+    User.deleteOne({_id: req.params.id})
+        .then(user => {
+            if (user.deletedCount === 0) {
+                res.status(404).send({
+                    message: `No user with selected ID!`
+                });
+            } else {
+                res.send({
+                    message: "User deleted!"
+                });
+            }
+        })
+        .catch(error => {
+            res.status(500).send({
+                message: error.message || "An error occurred while deleting user!"
+            });
+        });
 };

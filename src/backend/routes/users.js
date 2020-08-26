@@ -18,5 +18,8 @@ module.exports = usersRouter => {
     // Find user by ID
     router.get("/:id",usersController.findByID);
 
+    // Delete user by ID
+    router.delete("/:id",usersController.delete);
+
     usersRouter.use('/api/users', router);
 };
