@@ -39,7 +39,7 @@ exports.login = (req, res) => {
         return res.status(400).json({message : "All data required!"});
     }
 
-    passport.authenticate('local', (error, user, info) => {
+    passport.authenticate('local',  (error, user, info) =>{
         if (error)
             return res.status(500).json(error);
         if (user) {
@@ -48,4 +48,6 @@ exports.login = (req, res) => {
             res.status(401).json(info);
         }
     })(req, res);
+
+
 };

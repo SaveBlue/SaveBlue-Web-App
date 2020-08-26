@@ -24,7 +24,7 @@ require("./models/db");
 require("./routes/authentication")(server);
 require("./routes/users")(server);
 /*require("./routes/accounts.routes")(server);*/
-//require("./config/passport.js");
+require("./config/passport.js");
 
 const path = require('path')
 // Server static files from the Vue frontend app

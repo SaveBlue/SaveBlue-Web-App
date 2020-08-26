@@ -5,14 +5,12 @@ const User = mongoose.model('User');
 
 passport.use(
     new LocalStrategy(
-        {
-            usernameField: 'username',
-            passwordField: 'password'
-        },
+
         (userName, pass, PassCheckResult) => {
             User.findOne(
-                { userName: userName },
+                { username: userName },
                 (error, user) => {
+                    console.log(user)
                     if (error)
                         return PassCheckResult(error);
                     if (!user || !user.checkPassword(pass)) {
