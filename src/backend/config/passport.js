@@ -17,7 +17,7 @@ passport.use(
                         return PassCheckResult(error);
                     if (!user || !user.checkPassword(pass)) {
                         return PassCheckResult(null, false, {
-                            "message": "Wrong username or password!"
+                            message: "Wrong username or password!"
                         });
                     }
                     return PassCheckResult(null, user);

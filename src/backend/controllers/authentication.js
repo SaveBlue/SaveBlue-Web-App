@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-//const passport = require('passport');
+const passport = require('passport');
 const User = mongoose.model('User');
 
 // Register a new user
@@ -35,4 +35,17 @@ exports.register = (req, res) => {
 // Login to user account
 exports.login = (req, res) => {
 
+    if (!req.body.username|| !req.body.password) {
+        return res.status(400).json({message : "All data required!"});
+    }
+
+    passport.authenticate('local', (error, user, info) => {
+        if (error)
+            return res.status(500).json(error);
+        if (user) {
+            res.status(200).json({"JWT": "user.generirajJwt()"});
+        } else {
+            res.status(401).json(info);
+        }
+    })(req, res);
 };

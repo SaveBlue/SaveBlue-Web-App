@@ -65,10 +65,10 @@ user.methods.hashPassword = function(password) {
 
 // Hash received password and compare it
 user.methods.checkPassword = function(password) {
-    var hashedPassword = crypto
-        .pbkdf2Sync(geslo, this.salt, 1000, 64, 'sha512')
+    let hashedPassword = crypto
+        .pbkdf2Sync(password, this.salt, 1000, 64, 'sha512')
         .toString('hex');
-    return this.hashedPassword == hashedPassword;
+    return this.hashedPassword === hashedPassword;
 };
 
 /*user.methods.generateJWT = function() {
