@@ -71,22 +71,13 @@ user.methods.checkPassword = function(password) {
     return this.hashedPassword === hashedPassword;
 };
 
-/*user.methods.generateJWT = function() {
-    const datumPoteka = new Date();
-    datumPoteka.setDate(datumPoteka.getDate() + 7);
+user.methods.generateJWT = function() {
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 7);
 
-    return jwt.sign({
-        _id: this._id,
-        uime: this.uime,
-        ime: this.ime,
-        priimek: this.priimek,
-        mail: this.mail,
-        spol: this.spol,
-        starost: this.starost,
-        vnosi: this.vnosi,
-        admin: this.admin,
-        datumPoteka: parseInt(datumPoteka.getTime() / 1000, 10)
-    }, process.env.JWT_GESLO);
-};*/
+    return jwt.sign({ id: user.id }, config.secret, {
+        expiresIn: 86400 // 24 hours
+    });
+};
 
 mongoose.model('User', user);

@@ -43,7 +43,7 @@ exports.login = (req, res) => {
         if (error)
             return res.status(500).json(error);
         if (user) {
-            res.status(200).json({"JWT": "user.generirajJwt()"});
+            res.status(200).json({"JWT Token": user.generateJWT()});
         } else {
             res.status(401).json(info);
         }
