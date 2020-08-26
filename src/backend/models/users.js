@@ -49,9 +49,8 @@ const account = new Schema({
 
 const user = new Schema({
     username: {type: String, required: true},
-    password: {type: String, required: true},
     email: {type: String, required: true},
-    hashValue: {type: String, required: true},
+    hashedPassword: {type: String, required: true},
     salt: {type: String, required: true},
     accounts: {type: [account], required: true},
 });
