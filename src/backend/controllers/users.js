@@ -1,5 +1,7 @@
-const db = require("../models");
-const User = db.user;
+const mongoose = require('mongoose');
+//const passport = require('passport');
+const User = mongoose.model('User');
+
 
 // Register a new user
 exports.register = (req, res) => {
@@ -16,10 +18,11 @@ exports.register = (req, res) => {
         username: req.body.username,
         hashedPassword: req.body.password,
         email: req.body.email,
-        accounts: []
+        accounts: [],
+        salt: "test"
     });
 
-    // Save new user in the database
+    // Save new User in the database
     newUser
         .save(newUser)
         .then(data => {
@@ -27,7 +30,7 @@ exports.register = (req, res) => {
         })
         .catch(err => {
             res.status(500).send({
-                message: err.message || "Some error occurred while creating new User!"
+                message: err.message || "An error occurred while creating new User!"
             });
         });
 };

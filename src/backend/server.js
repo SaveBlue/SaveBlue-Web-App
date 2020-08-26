@@ -20,10 +20,10 @@ server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 //---------------------------------------------
 
-/*require("./routes/users.routes")(server);
-require("./routes/accounts.routes")(server);*/
-//require("./config/passport.js");
 require("./models/db.js");
+require("./routes/users")(server);
+/*require("./routes/accounts.routes")(server);*/
+//require("./config/passport.js");
 
 const path = require('path')
 // Server static files from the Vue frontend app
