@@ -55,23 +55,23 @@ const user = new Schema({
     accounts: {type: [account], required: true},
 });
 
-/*user.methods.nastaviGeslo = function(geslo) {
-    this.nakljucnaVrednost = crypto.randomBytes(16).toString('hex');
-    this.zgoscenaVrednost = crypto
-        .pbkdf2Sync(geslo, this.nakljucnaVrednost, 1000, 64, 'sha512')
+// Create salt and hash password
+user.methods.hashPassword = function(password) {
+    this.salt = crypto.randomBytes(16).toString('hex');
+    this.hashedPassword = crypto
+        .pbkdf2Sync(password, this.salt, 1000, 64, 'sha512')
         .toString('hex');
 };
 
-user.methods.checkPassword = function(geslo) {
-    console.log(this.nakljucnaVrednost);
-    var zgoscenaVrednost = crypto
-        .pbkdf2Sync(geslo, this.nakljucnaVrednost, 1000, 64, 'sha512')
+// Hash received password and compare it
+user.methods.checkPassword = function(password) {
+    var hashedPassword = crypto
+        .pbkdf2Sync(geslo, this.salt, 1000, 64, 'sha512')
         .toString('hex');
-    console.log("To je zgoscena:" + zgoscenaVrednost);
-    return this.zgoscenaVrednost == zgoscenaVrednost;
+    return this.hashedPassword == hashedPassword;
 };
 
-user.methods.generirajJwt = function() {
+/*user.methods.generateJWT = function() {
     const datumPoteka = new Date();
     datumPoteka.setDate(datumPoteka.getDate() + 7);
 

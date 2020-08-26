@@ -11,10 +11,6 @@ module.exports = usersRouter => {
     const usersController = require("../controllers/users");
     const router = require("express").Router();
 
-    // Register new user
-    router.post("/register",usersController.register);
-
-
     // Find user by ID
     router.get("/:id",usersController.findByID);
 

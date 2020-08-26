@@ -20,7 +20,8 @@ server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 //---------------------------------------------
 
-require("./models/db.js");
+require("./models/db");
+require("./routes/authentication")(server);
 require("./routes/users")(server);
 /*require("./routes/accounts.routes")(server);*/
 //require("./config/passport.js");
