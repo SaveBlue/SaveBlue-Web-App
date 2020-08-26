@@ -8,9 +8,8 @@ passport.use(
 
         (userName, pass, PassCheckResult) => {
             User.findOne(
-                { username: userName },
+                { username: userName }, 'username hashedPassword salt',
                 (error, user) => {
-                    console.log(user)
                     if (error)
                         return PassCheckResult(error);
                     if (!user || !user.checkPassword(pass)) {

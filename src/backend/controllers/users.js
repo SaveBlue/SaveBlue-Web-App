@@ -3,7 +3,7 @@ const User = mongoose.model('User');
 
 // Find a user with an id
 exports.findByID = (req, res) => {
-    User.findById({_id: req.params.id})
+    User.findById({_id: req.params.id}, 'username email')
         .then(user => {
             if (!user) {
                 return res.status(404).json({
@@ -23,7 +23,7 @@ exports.findByID = (req, res) => {
 exports.update = (req, res) => {
     console.log(req.body);
 
-    User.findById({_id: req.params.id})
+    User.findById({_id: req.params.id}, 'username email hashedPassword salt')
         .then(user => {
 
             if (!user) {
@@ -31,6 +31,8 @@ exports.update = (req, res) => {
                     message: "No user with selected ID!"
                 });
             }
+
+            console.log(user)
 
             if(req.body.username)
                 user.username = req.body.username;
@@ -45,11 +47,10 @@ exports.update = (req, res) => {
             if(req.body.password)
             user.hashPassword(req.body.password);
 
-            // TODO JWT
             // save updated user data
             user.save()
                 .then(() => {
-                    res.status(200).json({"JWT": "uporabnik.generirajJwt()"})
+                    res.status(200).json({"JWT": user.generateJWT()})
                 })
                 .catch(error => {
                     res.status(500).send({
