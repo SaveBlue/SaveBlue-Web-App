@@ -15,7 +15,8 @@ exports.register = (req, res) => {
     // Create a new user
     const newUser = new User({
         username: req.body.username,
-        email: req.body.email
+        email: req.body.email,
+        accounts: []
     });
     newUser.hashPassword(req.body.password)
 

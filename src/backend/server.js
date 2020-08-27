@@ -25,6 +25,7 @@ server.use(bodyParser.urlencoded({ extended: true }));
 require("./models/db");
 require("./routes/authentication")(server);
 require("./routes/users")(server);
+require("./routes/accounts")(server);
 require("./config/passport.js");
 
 const path = require('path');

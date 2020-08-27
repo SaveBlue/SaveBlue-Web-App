@@ -11,14 +11,19 @@ module.exports = accountsRouter => {
     const accountsController = require("../controllers/accounts");
     const router = require("express").Router();
 
-    // Get all accounts of user by ID
+    /*// Get all accounts of user by ID
     router.get("/:uid",accountsController.findAllByID);
 
     // Delete account by ID
     router.delete("/:id",accountsController.delete);
 
     // Update account by id
-    router.put("/:id",accountsController.update);
+    router.put("/:id",accountsController.update);*/
+
+    router.get("/:uid",accountsController.findAllAccountsByUserID);
+    router.get("/find/:id",accountsController.findAnAccountByID);
+
+    router.post("/:uid",accountsController.createAccount);
 
     accountsRouter.use('/api/accounts', router);
 };
