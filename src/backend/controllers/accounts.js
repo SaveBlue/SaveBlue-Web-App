@@ -3,7 +3,7 @@ const User = mongoose.model('User');
 
 // Find all accounts of user with selected id
 exports.findAllAccountsByUserID = (req, res) => {
-    User.findById( req.params.uid, 'accounts.name')
+    User.findById( req.params.uid, 'accounts._id accounts.name accounts.currentBalance accounts.startOfMonth')
         .then(accounts => {
             if (!accounts) {
                 return res.status(404).json({
@@ -18,12 +18,12 @@ exports.findAllAccountsByUserID = (req, res) => {
             });
         });
 };
+//-----------------------------------------------------------------------------------
 
-//{'accounts': {$elemMatch: {_id: req.params.id}}}
-//accounts._id accounts.name accounts.currentBalance accounts.startOfMonth
 // Find account with selected id
-exports.findAnAccountByID = (req, res) => {
-    User.findOne({'accounts._id': req.params.id}, {'accounts.$': 1})
+exports.findAccountByID = (req, res) => {
+
+    User.findOne({'accounts._id': req.params.id},{'accounts.$': 1} )
         .then(account => {
 
             if (!account) {
@@ -31,15 +31,15 @@ exports.findAnAccountByID = (req, res) => {
                     message: "No account with selected ID!"
                 });
             }
-            res.status(200).json(account);
+            res.status(200).json(account.accounts[0]);
         })
         .catch(error => {
             res.status(500).send({
                 message: error.message || "An error occurred while fetching account!"
             });
         })
-
 };
+//-----------------------------------------------------------------------------------
 
 
 
@@ -57,7 +57,7 @@ exports.createAccount = (req, res) => {
     };
 
     //finds user and appends newAccount to the accounts array, then returns the new list of all account names
-    User.findByIdAndUpdate(req.params.uid,{$push: {accounts: newAccount}},{new:true, select:'accounts.name'} )
+    User.findByIdAndUpdate(req.params.uid,{$push: {accounts: newAccount}},{new:true, select:'accounts.id accounts.name'} )
         .then(accounts => {
 
             if (!accounts) {
@@ -74,6 +74,102 @@ exports.createAccount = (req, res) => {
             });
         });
 };
+//-----------------------------------------------------------------------------------
+
+
+// Delete account with selected id
+exports.deleteAccountByID = (req, res) => {
+
+    // find the user who has the required account
+    User.findOne({'accounts._id': req.params.id},'accounts._id accounts.name')
+        .then(user => {
+
+            if (!user) {
+                return res.status(404).json({
+                    message: "No account with selected ID!"
+                });
+            }
+
+            // remove the selected account
+            user.accounts.pull({'_id': req.params.id})
+
+            // save updated user data (deleted account)
+            user.save()
+                .then(() => {
+                    res.status(200).json(user)
+                })
+                .catch(error => {
+                    res.status(500).send({
+                        message: error.message || "An error occurred while deleting account!"
+                    });
+                });
+        })
+        .catch(error => {
+            res.status(500).send({
+                message: error.message || "An error occurred while fetching account!"
+            });
+        })
+};
+//-----------------------------------------------------------------------------------
+
+
+// Update account with selected id
+exports.updateAccountByID = (req, res) => {
+
+    // find the user who has the required account
+    User.findOne({'accounts._id': req.params.id}, 'accounts.name accounts.currentBalance accounts.startOfMonth')
+        .then(user => {
+
+            if (!user) {
+                return res.status(404).json({
+                    message: "No account with selected ID!"
+                });
+            }
+
+            // get wanted account from found user
+            let account = user.accounts[0];
+
+            // check if updating name
+            if(req.body.name) {
+                account.name = req.body.name;
+            }
+
+            // check if updating currentBalance
+            if(req.body.currentBalance) {
+                account.currentBalance = req.body.currentBalance;
+            }
+
+            // check if updating startOfMonth and format it correctly
+            if(req.body.startOfMonth) {
+                account.startOfMonth = req.body.startOfMonth;
+
+                if(account.startOfMonth > 31)
+                    account.startOfMonth = 31
+
+                if(account.startOfMonth < 1)
+                    account.startOfMonth = 1
+            }
+
+            // save updated user data (updated account)
+            user.save()
+                .then(() => {
+                    res.status(200).json(account)
+                })
+                .catch(error => {
+                    res.status(500).send({
+                        message: error.message || "An error occurred while updating account!"
+                    });
+                });
+        })
+        .catch(error => {
+            res.status(500).send({
+                message: error.message || "An error occurred while fetching account!"
+            });
+        })
+};
+
+
+
 
 
 
