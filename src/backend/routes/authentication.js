@@ -19,4 +19,4 @@ module.exports = authenticationRouter => {
 
 
     authenticationRouter.use('/api/auth', router);
-};
+}
