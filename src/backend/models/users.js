@@ -20,29 +20,11 @@ const goal = new Schema({
     complete: {type: Boolean, default: false},
 });
 
-const expense = new Schema({
-    name: {type: String, required: true},
-    description: String,
-    // category: { type: String, enum: ['category1', 'category2', 'category3'], required: true },
-    date: {type: Date, default: Date.now},
-    amount: {type: Number, required: true}
-});
-
-const income = new Schema({
-    name: {type: String, required: true},
-    description: String,
-    // category: { type: String, enum: ['category1', 'category2', 'category3'], required: true },
-    date: {type: Date, default: Date.now},
-    amount: {type: Number, required: true}
-});
-
 const account = new Schema({
     name: {type: String, required: true},
     currentBalance: {type: Number, required: true},
     budgets: [budget],
     goals: [goal],
-    expenses: [expense],
-    incomes: [income],
     startOfMonth: {type: Number, required: true}
 
 });
