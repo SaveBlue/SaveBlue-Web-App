@@ -27,6 +27,7 @@ require("./routes/authentication")(server);
 require("./routes/users")(server);
 require("./routes/accounts")(server);
 require("./routes/incomes")(server);
+require("./routes/expenses")(server);
 require("./config/passport.js");
 
 const path = require('path');

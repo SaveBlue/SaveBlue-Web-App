@@ -56,7 +56,7 @@ exports.create = (req, res) => {
         })
         .catch(error => {
             res.status(500).send({
-                message: error.message || "An error occurred while creating new user!"
+                message: error.message || "An error occurred while creating new income!"
             });
         });
 
@@ -66,6 +66,7 @@ exports.create = (req, res) => {
 exports.delete = (req, res) => {
     Income.findByIdAndDelete(req.params.id)
         .then(income => {
+            // TODO: "Cannot read property 'deletedCount' of null"
             if (income.deletedCount === 0) {
                 res.status(404).send({
                     message: `No income with selected ID!`
@@ -78,7 +79,7 @@ exports.delete = (req, res) => {
         })
         .catch(error => {
             res.status(500).send({
-                message: error.message || "An error occurred while deleting income!"
+                message: error.message || "An error occurred while deleting the income!"
             });
         });
 };
@@ -114,7 +115,7 @@ exports.update = (req, res) => {
         })
         .catch(error => {
             res.status(500).send({
-                message: error.message || "An error occurred while deleting income!"
+                message: error.message || "An error occurred while updating the income!"
             });
         });
 };
