@@ -13,7 +13,7 @@ exports.register = (req, res) => {
     }
 
     // Create a new user
-    const newUser = new User({
+    let newUser = new User({
         username: req.body.username,
         email: req.body.email,
         accounts: []
@@ -22,6 +22,7 @@ exports.register = (req, res) => {
 
     // Save new User in the database
     newUser
+        // TODO: check if is it better ro use .create instead of .save
         .save(newUser)
         .then(data => {
             res.send(data);

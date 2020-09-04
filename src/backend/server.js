@@ -26,6 +26,7 @@ require("./models/db");
 require("./routes/authentication")(server);
 require("./routes/users")(server);
 require("./routes/accounts")(server);
+require("./routes/incomes")(server);
 require("./config/passport.js");
 
 const path = require('path');
