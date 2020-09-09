@@ -1,24 +1,42 @@
 <template>
   <div id="app">
-    <Header/>
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <!-- Content -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-desktop-drawer-button">
+      <!-- Header -->
+      <Header/>
+      <!-- Navigation Drawer, hide on big screens -->
+      <NavigationDrawer/>
+      <!-- Content -->
+      <main class="mdl-layout__content">
+        <div class="mdl-grid">
+          <router-view/>
+        </div>
+        <!-- Footer -->
+        <Footer/>
+      </main>
     </div>
-    <router-view/>
   </div>
 </template>
 
 <script>
- import Header from "@/components/Header";
- export default {
-   components: {Header}
- }
+
+import Header from "@/components/Header";
+import NavigationDrawer from "@/components/NavigationDrawer";
+import Footer from "@/components/Footer";
+
+export default {
+  components: {
+    Footer,
+    NavigationDrawer,
+    Header
+
+  }
+}
 
 </script>
 
 <style>
-#app {
+/*#app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -37,5 +55,5 @@
 
 #nav a.router-link-exact-active {
   color: #42b983;
-}
+}*/
 </style>

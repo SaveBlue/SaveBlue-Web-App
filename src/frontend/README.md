@@ -1,4 +1,4 @@
-# frontend
+# SaveBlue
 
 ## Project setup
 ```
