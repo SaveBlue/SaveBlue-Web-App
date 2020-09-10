@@ -8,7 +8,7 @@
       <NavigationDrawer/>
       <!-- Content -->
       <main class="mdl-layout__content">
-        <div class="mdl-grid">
+        <div class="main-content-grid mdl-grid">
           <router-view/>
         </div>
         <!-- Footer -->
@@ -35,7 +35,14 @@ export default {
 
 </script>
 
+
 <style>
+/* To govno je potrebno da ni roba okol slike */
+.main-content-grid {
+  padding: 0;
+}
+
+
 /*#app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
