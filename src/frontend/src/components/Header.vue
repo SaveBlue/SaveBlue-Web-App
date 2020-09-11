@@ -1,5 +1,5 @@
 <template>
-  <header class="mdl-layout__header">
+  <header  class="mdl-layout__header">
     <!-- Always shows a header, even in smaller screens. -->
     <div class="mdl-layout__header-row">
       <!-- Title -->
@@ -21,7 +21,8 @@ export default {
   name: "Header",
   components: {
     HeaderMenu
-  }
+  },
+
 }
 
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="signin-background">
-    <div class="mdl-grid center-items signin-grid">
+    <div class="mdl-grid signin-grid">
       <div class="welcome-text mdl-cell
       mdl-cell--4-col  mdl-cell--1-offset-desktop
        mdl-cell--6-col-tablet mdl-cell--1-offset-tablet

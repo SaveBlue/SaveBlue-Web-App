@@ -1,7 +1,24 @@
 <template>
   <div id="app">
     <!-- Content -->
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-desktop-drawer-button">
+    <div v-if="isLoggedIn" class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+      <!-- Header -->
+      <Header/>
+      <!-- Navigation Drawer, hide on big screens -->
+      <NavigationDrawer/>
+      <!-- Content -->
+      <main class="mdl-layout__content">
+        <div class="main-content-grid mdl-grid">
+          <router-view/>
+        </div>
+        <!-- Footer -->
+        <Footer/>
+      </main>
+    </div>
+
+
+
+    <div v-else class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-desktop-drawer-button">
       <!-- Header -->
       <Header/>
       <!-- Navigation Drawer, hide on big screens -->
@@ -29,8 +46,13 @@ export default {
     Footer,
     NavigationDrawer,
     Header
-
+  },
+  computed: {
+    isLoggedIn() {
+      return !(this.$route.name === 'Home' || this.$route.name === 'About');
+    }
   }
+
 }
 
 </script>
@@ -40,6 +62,7 @@ export default {
 /* To govno je potrebno da ni roba okol slike */
 .main-content-grid {
   padding: 0;
+  background: antiquewhite;
 }
 
 
