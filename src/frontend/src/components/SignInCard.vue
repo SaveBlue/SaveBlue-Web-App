@@ -33,7 +33,7 @@
         <!-- Sign up reference text-->
         <div class="mdl-grid">
           <div class="mdl-cell mdl-cell--10-col mdl-cell--1-offset-desktop">
-            <a v-on:click="registerDialog" class="mdl-color-text--primary">Sign up!</a>
+            <a v-on:click="registerDialog" class="mdl-color-text--primary signup-text">Sign up!</a>
 
           </div>
         </div>
@@ -41,20 +41,27 @@
       </div>
     </form>
 
+    <RegisterDialog/>
+
   </div>
 </template>
 
 <script>
+import RegisterDialog from "@/components/RegisterDialog";
 export default {
   name: "SignInCard",
+  components: {RegisterDialog},
   methods:{
     logIn: function (){
       alert("login")
     },
-    registerDialog: function (){}
+    registerDialog: function (){
+
+      let dialog = document.querySelector('dialog');
+      dialog.showModal();
+    }
   }
 }
-
 
 
 </script>
