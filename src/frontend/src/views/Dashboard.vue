@@ -7,14 +7,16 @@
           <AccountDashboardCard/>
         </div>
       </div>
+    <FAB/>
   </div>
 </template>
 
 <script>
 import AccountDashboardCard from "@/components/AccountDashboardCard";
+import FAB from "@/components/FAB";
 export default {
 name: "Dashboard",
-  components: {AccountDashboardCard}
+  components: {FAB, AccountDashboardCard}
 }
 </script>
 

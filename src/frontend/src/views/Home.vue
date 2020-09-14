@@ -1,7 +1,6 @@
 <template>
   <div class="home">
     <SignIn />
-
     <HelloWorld msg="Welcome to Your Vue.js App"/>
 
   </div>
@@ -11,7 +10,6 @@
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
 import SignIn from "@/components/SignIn";
-
 
 export default {
   name: 'Home',
