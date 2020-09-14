@@ -7,7 +7,7 @@
       <!-- Add spacer, to align navigation to the right -->
       <div class="mdl-layout-spacer"></div>
       <!-- Header Menu -->
-      <HeaderMenu/>
+      <HeaderMenu v-if="!isLoggedIn"/>
     </div>
   </header>
 
@@ -21,6 +21,11 @@ export default {
   name: "Header",
   components: {
     HeaderMenu
+  },
+  computed: {
+    isLoggedIn() {
+      return !(this.$route.name === 'Home' || this.$route.name === 'About');
+    },
   },
 
 }
