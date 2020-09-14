@@ -35,7 +35,7 @@ export default {
 
 <style scoped>
 .signin-background {
-  background-image: url('../assets/Civetta-3.jpg');
+  /*background-image: url('../assets/Civetta-3.jpg');*/
   background-repeat: no-repeat;
   background-size: cover;
   margin: 0;
