@@ -6,30 +6,29 @@
     <form @submit.prevent="logIn">
 
       <div class="mdl-card__title mdl-color--primary mdl-color-text--white relative">
-        <h1 class="mdl-card__title-text">Sign In</h1>
+        <h2 class="mdl-card__title-text">Sign In</h2>
       </div>
 
       <div class="mdl-card__supporting-text">
 
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textInputWide">
-          <input  v-focus class="mdl-textfield__input" type="text" id="usernameLogin">
-          <label class="mdl-textfield__label" for="usernameLogin">Username</label>
+          <input class="mdl-textfield__input" type="text" id="username">
+          <label class="mdl-textfield__label" for="username">Username</label>
         </div>
-
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textInputWide">
           <input class="mdl-textfield__input" type="password" id="passwordLogin">
           <label class="mdl-textfield__label" for="passwordLogin">Password</label>
         </div>
+      </div>
+
+      <!-- Sign in button-->
+      <div class="mdl-card__actions mdl-card--border">
+
 
         <button
             class="mdl-cell mdl-cell--10-col mdl-cell--1-offset-desktop mdl-button mdl-button--raised mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
           Sign In
         </button>
-
-      </div>
-
-      <!-- Sign in button-->
-      <div class="mdl-card__actions mdl-card--border">
 
         <!-- Sign up reference text-->
         <div class="mdl-grid">
@@ -54,7 +53,7 @@ export default {
   components: {RegisterDialog},
   methods:{
     logIn: function (){
-      alert("login")
+      //alert("login")
     },
     registerDialog: function (){
 

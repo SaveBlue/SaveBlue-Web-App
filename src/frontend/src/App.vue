@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div v-mdl id="app">
     <!-- Content -->
     <div v-if="isLoggedIn" class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
       <!-- Header -->
@@ -51,7 +51,15 @@ export default {
     isLoggedIn() {
       return !(this.$route.name === 'Home' || this.$route.name === 'About');
     }
-  }
+  },
+  directives: {
+    mdl: {
+      updated() {
+        window.componentHandler.upgradeDom();
+      }
+    }
+  },
+
 
 }
 

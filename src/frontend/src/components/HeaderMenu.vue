@@ -4,6 +4,7 @@
     <router-link class="mdl-navigation__link" to="/">Home</router-link>
     <router-link class="mdl-navigation__link" to="/about">About</router-link>
     <router-link class="mdl-navigation__link" to="/expenses">Expenses</router-link>
+    <router-link class="mdl-navigation__link" to="/dashboard">Dashboard</router-link>
   </nav>
 </template>
 

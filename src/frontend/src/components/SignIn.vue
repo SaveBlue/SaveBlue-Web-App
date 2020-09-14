@@ -14,7 +14,7 @@
           laborum.</p>
       </div>
 
-      <div class="mdl-cell mdl-cell--2-col-desktop mdl-cell--hide-tablet " />
+      <div class="mdl-cell mdl-cell--2-col-desktop mdl-cell--hide-tablet "/>
       <SignInCard/>
 
     </div>
@@ -28,6 +28,8 @@ import SignInCard from "@/components/SignInCard";
 export default {
   name: "SignIn",
   components: {SignInCard}
+
+
 }
 </script>
 
@@ -47,8 +49,6 @@ export default {
   padding: 32px;
 
 }
-
-
 
 
 </style>

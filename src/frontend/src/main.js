@@ -6,11 +6,11 @@ const app = createApp(App);
 
 app.use(router).mount('#app')
 
-app.directive('mdl', {
-    beforeMount(el) {
-        window.componentHandler.upgradeElement(el);
+/*app.directive('mdl', {
+    updated() {
+        window.componentHandler.upgradeDom();
     }
-});
+});*/
 
 app.directive('focus', {
     // When the bound element is mounted into the DOM...
