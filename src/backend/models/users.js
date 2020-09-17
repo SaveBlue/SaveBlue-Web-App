@@ -31,12 +31,14 @@ const account = new Schema({
 
 
 const user = new Schema({
-    username: {type: String, required: true},
-    email: {type: String, required: true},
+    username: {type: String, required: true, unique:true},
+    email: {type: String, required: true, unique:true},
     hashedPassword: {type: String, required: true},
     salt: {type: String, required: true},
     accounts: {type: [account], required: true},
 });
+
+// User functions
 
 // Create salt and hash password
 user.methods.hashPassword = function(password) {

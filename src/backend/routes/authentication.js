@@ -1,3 +1,4 @@
+const registerCheck = require("../middlewares/registerCheck")
 module.exports = authenticationRouter => {
 
     authenticationRouter.use(function (req, res, next) {
@@ -12,7 +13,7 @@ module.exports = authenticationRouter => {
     const router = require("express").Router();
 
     // Register new user
-    router.post("/register",authenticationController.register);
+    router.post("/register",[registerCheck.checkUniqueUsernameEmail], authenticationController.register);
 
     // Login to user account
     router.post("/login",authenticationController.login);

@@ -1,3 +1,4 @@
+const authJWT = require("../middlewares/authJWT");
 module.exports = usersRouter => {
 
     usersRouter.use(function (req, res, next) {
@@ -12,13 +13,13 @@ module.exports = usersRouter => {
     const router = require("express").Router();
 
     // Find user by ID
-    router.get("/:id",usersController.findByID);
+    router.get("/:id", [authJWT.verifyToken], usersController.findByID);
 
     // Delete user by ID
-    router.delete("/:id",usersController.delete);
+    router.delete("/:id", [authJWT.verifyToken], usersController.delete);
 
     // Update user by ID
-    router.put("/:id",usersController.update);
+    router.put("/:id", [authJWT.verifyToken], usersController.update);
 
     usersRouter.use('/api/users', router);
 };
