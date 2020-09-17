@@ -49,7 +49,6 @@ exports.create = (req, res) => {
 
     // save income
     newIncome
-        // TODO: check if is it better to use .create instead of .save
         .save(newIncome)
         .then(data => {
             res.send(data);
@@ -66,8 +65,8 @@ exports.create = (req, res) => {
 exports.delete = (req, res) => {
     Income.findByIdAndDelete(req.params.id)
         .then(income => {
-            // TODO: "Cannot read property 'deletedCount' of null"
-            if (income.deletedCount === 0) {
+
+            if (!income) {
                 res.status(404).send({
                     message: `No income with selected ID!`
                 });

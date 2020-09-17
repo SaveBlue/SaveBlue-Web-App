@@ -49,7 +49,6 @@ exports.create = (req, res) => {
 
     // save expense
     newExpense
-        // TODO: check if is it better to use .create instead of .save
         .save(newExpense)
         .then(data => {
             res.send(data);
@@ -66,8 +65,8 @@ exports.create = (req, res) => {
 exports.delete = (req, res) => {
     Expense.findByIdAndDelete(req.params.id)
         .then(expense => {
-            // TODO: "Cannot read property 'deletedCount' of null"
-            if (expense.deletedCount === 0) {
+
+            if (!expense) {
                 res.status(404).send({
                     message: `No expense with selected ID!`
                 });
