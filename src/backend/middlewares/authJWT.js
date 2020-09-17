@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const config = require("../config/auth");
 
-verifyToken = (req, res, next) => {
+verifyTokenUser = (req, res, next) => {
     let token = req.headers["x-access-token"];
 
     if (!token) {
@@ -13,12 +13,14 @@ verifyToken = (req, res, next) => {
             return res.status(401).send({message: "Unauthorized!"});
         }
 
-        req.uid = decoded.id;
-        next();
+        if(req.params.id === decoded.id)
+            next();
+        else
+            return res.status(401).send({message: "Unauthorized!"});
     });
 };
 
 const authJwt = {
-    verifyToken: verifyToken
+    verifyTokenUser: verifyTokenUser
 };
 module.exports = authJwt;

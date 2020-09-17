@@ -13,13 +13,13 @@ module.exports = usersRouter => {
     const router = require("express").Router();
 
     // Find user by ID
-    router.get("/:id", [authJWT.verifyToken], usersController.findByID);
+    router.get("/:id", [authJWT.verifyTokenUser], usersController.findByID);
 
     // Delete user by ID
-    router.delete("/:id", [authJWT.verifyToken], usersController.delete);
+    router.delete("/:id", [authJWT.verifyTokenUser], usersController.delete);
 
     // Update user by ID
-    router.put("/:id", [authJWT.verifyToken], usersController.update);
+    router.put("/:id", [authJWT.verifyTokenUser], usersController.update);
 
     usersRouter.use('/api/users', router);
 };
