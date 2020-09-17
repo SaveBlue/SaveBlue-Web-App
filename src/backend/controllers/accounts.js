@@ -47,7 +47,7 @@ exports.findAccountByID = (req, res) => {
 exports.createAccount = (req, res) => {
 
     let newAccount = {
-        name: req.body.name,
+        name: req.body.name || "New Account",
         currentBalance: 0,
         budgets: [],
         goals: [],
