@@ -40,6 +40,7 @@ exports.findExpenseByID = (req, res) => {
 exports.create = (req, res) => {
 
     const newExpense = new Expense ({
+        userID: req.body.userID,
         accountID: req.body.accountID,
         name: req.body.name,
         description: req.body.description,
