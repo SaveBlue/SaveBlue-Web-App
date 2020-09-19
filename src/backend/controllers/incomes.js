@@ -40,6 +40,7 @@ exports.findIncomeByID = (req, res) => {
 exports.create = (req, res) => {
 
     const newIncome = new Income ({
+        userID: req.body.userID,
         accountID: req.body.accountID,
         name: req.body.name,
         description: req.body.description,
